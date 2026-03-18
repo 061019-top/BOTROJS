@@ -17,7 +17,8 @@ let product = [
 //foreach để in qua từng object
 product.forEach((item) => {
   console.log(
-    `${item.id}-${item.name}-${item.price}-${item.quantity}-${item.description}`,
+    item['name']// có thể dùng item.name
+    // `${item.id}-${item.name}-${item.price}-${item.quantity}-${item.description}`,
   );
 });
 // map trả về mảng mới
