@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K25_CNTT_HN - Toast Notification</title>
+  <!-- CSS để tạo nền, card trung tâm và style cho toast -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Lớp nền grid xanh nhạt (decorative, không tương tác) -->
+  <div class="bg-grid"></div>
+
+  <!-- Phần nội dung chính: tiêu đề + panel chứa nút trigger toast -->
+  <main class="hero">
+    <h1>K25_CNTT_HN</h1>
+    <p>Toast Notification<br />System</p>
+
+    <section class="panel">
+      <!-- Dòng demo: có chấm xanh và text "LIVE DEMO" -->
+      <div class="panel-title">
+        <span class="dot"></span>
+        LIVE DEMO - TRIGGER TOASTS
+      </div>
+
+      <!-- 4 nút để bắn toast theo các trạng thái khác nhau -->
+      <div class="btn-grid">
+        <button class="trigger success" data-type="success">Success</button>
+        <button class="trigger error" data-type="error">Error</button>
+        <button class="trigger info" data-type="info">Info</button>
+        <button class="trigger warning" data-type="warning">Warning</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Container toast: JS sẽ thêm toast vào đây (ở góc phải phía trên) -->
+  <aside id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></aside>
+
+  <!-- JS để tạo toast khi bấm nút -->
+  <script src="script.js"></script>
+</body>
+</html>

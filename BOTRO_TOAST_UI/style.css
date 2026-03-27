@@ -1,0 +1,261 @@
+:root {
+  --bg: #070b17;
+  --panel: rgba(17, 24, 39, 0.72);
+  --text: #e8ecf8;
+  --muted: #8ca0c8;
+  --success: #2cd673;
+  --error: #ff4b4b;
+  --warning: #ffcb45;
+  --info: #3f8cff;
+}
+
+/* Reset/chuẩn hóa box sizing */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* Nền gradient tối giống phong cách trong ảnh */
+  background: radial-gradient(circle at 50% 20%, #0d1a3a 0%, var(--bg) 55%);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* Grid mờ trang trí phía sau */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(69, 98, 150, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(69, 98, 150, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at center, black 48%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Căn giữa phần hero */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 2rem;
+  text-align: center;
+}
+
+/* Tiêu đề lớn */
+h1 {
+  margin: 0;
+  letter-spacing: 1px;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-weight: 700;
+  text-shadow: 0 0 22px rgba(173, 198, 255, 0.2);
+}
+
+/* Sub-title dưới tiêu đề */
+.hero p {
+  margin: 0.4rem 0 0;
+  font-size: clamp(1rem, 2.3vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Khung panel chứa nút demo */
+.panel {
+  width: min(92vw, 760px);
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 22px;
+  background: var(--panel);
+  border: 1px solid rgba(139, 158, 197, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.42);
+}
+
+/* Dòng tiêu đề panel: có chấm xanh + chữ */
+.panel-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--muted);
+  font-size: 0.73rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 1.15rem;
+}
+
+/* Chấm xanh cho LIVE DEMO (sẽ chớp nháy) */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4be870;
+  box-shadow: 0 0 10px #4be870;
+  /* Hiệu ứng chớp nháy */
+  animation: demoBlink 1.05s infinite ease-in-out;
+}
+
+/* Grid 2 cột cho 4 nút trigger */
+.btn-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 0.8rem;
+}
+
+/* Nút bấm tạo toast */
+.trigger {
+  height: 58px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  /* Hiệu ứng hover nhẹ */
+  transition: transform 0.16s ease, filter 0.16s ease;
+}
+
+.trigger:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+.success {
+  background: linear-gradient(180deg, #1b7f4a, #0f6236);
+  border-color: rgba(44, 214, 115, 0.35);
+}
+
+.error {
+  background: linear-gradient(180deg, #7c2631, #5b1a23);
+  border-color: rgba(255, 75, 75, 0.35);
+}
+
+.info {
+  background: linear-gradient(180deg, #294a8e, #1c3569);
+  border-color: rgba(63, 140, 255, 0.35);
+}
+
+.warning {
+  background: linear-gradient(180deg, #7c5d1b, #5f4715);
+  border-color: rgba(255, 203, 69, 0.35);
+}
+
+.toast-container {
+  position: fixed;
+  right: 20px;
+  top: 18px;
+  width: min(420px, 92vw);
+  display: grid;
+  gap: 12px;
+  z-index: 20;
+}
+
+/* Mỗi toast (thẻ thông báo) */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(7, 13, 26, 0.9);
+  border: 1px solid;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+  animation: slideIn 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.toast .icon {
+  width: 22px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.toast .title {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.toast .desc {
+  color: #c3cde2;
+  font-size: 0.92rem;
+}
+
+.toast.success { border-color: rgba(44, 214, 115, 0.65); }
+.toast.error { border-color: rgba(255, 75, 75, 0.7); }
+.toast.warning { border-color: rgba(255, 203, 69, 0.7); }
+.toast.info { border-color: rgba(63, 140, 255, 0.75); }
+
+.toast.success .icon,
+.toast.success .title { color: var(--success); }
+.toast.error .icon,
+.toast.error .title { color: var(--error); }
+.toast.warning .icon,
+.toast.warning .title { color: var(--warning); }
+.toast.info .icon,
+.toast.info .title { color: var(--info); }
+
+.toast .progress {
+  /* Thanh tiến trình rút ngắn nằm ở đáy toast */
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  /* JS sẽ set biến --life theo thời lượng toast */
+  animation: shrink var(--life, 3900ms) linear forwards;
+}
+
+.toast.success .progress { background: var(--success); }
+.toast.error .progress { background: var(--error); }
+.toast.warning .progress { background: var(--warning); }
+.toast.info .progress { background: var(--info); }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(38px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Rút ngắn thanh tiến trình từ đầy -> 0 */
+@keyframes shrink {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Chớp nháy chấm xanh */
+@keyframes demoBlink {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 10px #4be870;
+  }
+  50% {
+    opacity: 0.25;
+    box-shadow: 0 0 3px #4be870;
+  }
+}
+
+@media (max-width: 640px) {
+  .btn-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .toast-container {
+    right: 10px;
+    top: 10px;
+  }
+}
